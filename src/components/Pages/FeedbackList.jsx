@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FiUser, FiMail, FiMessageSquare, FiCalendar } from 'react-icons/fi';
 import toast from 'react-hot-toast';
+import { server } from '../../constants/config';
 
 const FeedbackList = () => {
   const [feedbacks, setFeedbacks] = useState([]);
@@ -13,7 +14,7 @@ const FeedbackList = () => {
     const fetchFeedbacks = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('http://localhost:8000/api/v1/feedbacks');
+        const response = await axios.get(`${server}/api/v1/feedbacks`);
         if (isMounted) {
           setFeedbacks(response.data);
           toast.success('Feedbacks loaded successfully');

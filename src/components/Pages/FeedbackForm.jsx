@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { FiSend, FiLoader } from 'react-icons/fi';
 import toast from 'react-hot-toast';
+import { server } from '../../constants/config';
 
 const FeedbackForm = ({ onNewFeedback }) => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -16,7 +17,7 @@ const FeedbackForm = ({ onNewFeedback }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:8000/api/v1/submit-feedback', formData);
+      const response = await axios.post(`${server}/api/v1/submit-feedback`, formData);
       onNewFeedback(response.data);
       toast.success('Feedback submitted successfully!');
       setFormData({ name: '', email: '', message: '' });
